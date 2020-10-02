@@ -4,14 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Timer;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,13 +22,16 @@ import retrofit2.Response;
 
 public class otp extends AppCompatActivity implements View.OnClickListener {
     EditText et_otp;
-    String token;
+    String token,email;
+    TextView resend;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
+        resend=findViewById(R.id.tvresend_otp);
         Intent intent= getIntent();
         token = intent.getStringExtra("Token");
+        email=intent.getStringExtra("email");
         et_otp= findViewById(R.id.etotp);
         findViewById(R.id.btn_confirmemail).setOnClickListener(this);
         findViewById(R.id.tvresend_otp).setOnClickListener(this);
@@ -40,8 +46,38 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.tvresend_otp:
+                resend.setEnabled(false);
+
+                resend.postDelayed(new Runnable() {
+                                       public void run() {
+                                           resend.setEnabled(true);
+                                       }
+                                   }, 3*60*100);
+                resend();
                 break;
         }
+    }
+
+    private void resend() {
+    Reotp reotp=new Reotp(token,email);
+    Call<ResendResponse> call1=retroclient
+            .getInstance()
+            .getapi()
+            .resend(reotp);
+    call1.enqueue(new Callback<ResendResponse>() {
+        @Override
+        public void onResponse(Call<ResendResponse> call1, Response<ResendResponse> response) {
+            if (!response.isSuccessful()) {
+                Toast.makeText(getApplicationContext(), "response:" + response.message(), Toast.LENGTH_LONG).show();
+            }
+            assert response.body() != null;
+            Toast.makeText(getApplicationContext(),"New OTP is send to your mail", Toast.LENGTH_LONG).show();
+        }
+        @Override
+        public void onFailure(Call<ResendResponse> call1, Throwable t) {
+            Toast.makeText(getApplicationContext(),"failure:"+t.getMessage(),Toast.LENGTH_LONG).show();
+        }
+    });
     }
 
     private void verify() {

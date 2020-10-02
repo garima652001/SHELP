@@ -39,7 +39,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     private void signup() {
         String name=et_name.getText().toString();
-        String email=et_email.getText().toString();
+        final String email=et_email.getText().toString();
         String password=et_password.getText().toString();
         String confirmpassword=et_confirmpassword.getText().toString();
 
@@ -97,6 +97,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             Toast.makeText(SignupActivity.this, res.getMessage(), Toast.LENGTH_LONG).show();
                            Intent intent= new Intent(SignupActivity.this, otp.class);
                             intent.putExtra("Token",res.getToken());
+                            intent.putExtra("email",email);
                             startActivity(intent);
                         }
                         else {

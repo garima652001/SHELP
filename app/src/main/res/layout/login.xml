@@ -55,7 +55,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/studentlogin"
-        app:layout_constraintVertical_bias="0.256" />
+        app:layout_constraintVertical_bias="0.256"
+        android:paddingLeft="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -88,7 +89,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edittxtEmail"
-        app:layout_constraintVertical_bias="0.064" />
+        app:layout_constraintVertical_bias="0.064"
+        android:paddingLeft="20dp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -102,7 +104,9 @@
         android:text="Forgotten password?"
         android:textColor="#000"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edittxtPass" />
+        app:layout_constraintTop_toBottomOf="@+id/edittxtPass"
+        android:layout_marginLeft="72dp"
+        android:paddingLeft="20dp" />
 
     <TextView
         android:id="@+id/reset"
@@ -131,7 +135,8 @@
         android:textAllCaps="false"
         android:textColor="#fff"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        android:layout_marginLeft="20dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -144,7 +149,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/signup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginLeft="152dp" />
 
     <TextView
         android:id="@+id/signup"
@@ -156,7 +162,8 @@
         android:text="Sign up"
         android:textColor="#536DFE"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        android:layout_marginLeft="8dp" />
 
     <View
         android:layout_width="match_parent"

@@ -10,7 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.retrofit.api.RetrofitClient;
+
+import com.example.retrofit.apipackage.RetrofitClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -81,9 +82,9 @@ public class loginActivity extends AppCompatActivity {
                 if (!response.isSuccessful()) {
                     try {
                         String string = response.errorBody().string();
-//                        JSONObject jsonObject1 = new JSONObject(string);
-//                        String wrong = jsonObject1.getString("message");
-//                        Toast.makeText(getApplicationContext(), wrong, Toast.LENGTH_LONG).show();
+                        JSONObject jsonObject1 = new JSONObject(string);
+                        String wrong = jsonObject1.getString("message");
+                        Toast.makeText(getApplicationContext(), wrong, Toast.LENGTH_LONG).show();
                         JSONObject jsonObject = new JSONObject(string);
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         JSONObject meals = jsonArray.getJSONObject(0);
@@ -93,7 +94,7 @@ public class loginActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 } else {
-//                    Toast.makeText(getApplicationContext(), response.body().getMessage() + " " + response.body().getUsername() + " " + response.body().getToken(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), response.body().getMessage() + " " + response.body().getUsername() + " " + response.body().getToken(), Toast.LENGTH_LONG).show();
                     String token = response.body().getToken();
                     Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
                     SharedPreferences sharedPreferences = getSharedPreferences("t", MODE_PRIVATE);
