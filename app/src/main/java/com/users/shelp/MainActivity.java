@@ -1,0 +1,136 @@
+package com.users.shelp;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.util.Patterns;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private EditText et_email,et_password,et_name,et_confirmpassword;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        et_name=findViewById(R.id.etname);
+        et_email=findViewById(R.id.etemail);
+        et_password=findViewById(R.id.etpassword);
+        et_confirmpassword= findViewById(R.id.etconfirmpassword);
+
+        findViewById(R.id.btnsignup).setOnClickListener(this);
+        findViewById(R.id.tvlogin).setOnClickListener(this);
+
+    }
+
+    private void signup() {
+       // final String name="abc", email="garima3837@gmail.com", password="123456", confirmpassword="123456";
+        String name=et_name.getText().toString();
+        String email=et_email.getText().toString();
+        String password=et_password.getText().toString();
+        String confirmpassword=et_confirmpassword.getText().toString();
+
+        if(name.isEmpty())
+        {
+            et_name.setError("Name cannot be empty");
+            et_name.requestFocus();
+            return;
+        }
+        if(email.isEmpty())
+        {
+            et_email.setError("Email is required");
+            et_email.requestFocus();
+            return;
+        }
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            et_email.setError("Enter a valid email");
+            et_email.requestFocus();
+            return;
+        }
+        if(password.isEmpty())
+        {
+            et_password.setError("Password is required");
+            et_password.requestFocus();
+            return;
+        }
+        if(password.length()<5)
+        {
+            et_password.setError("Password must be atleast 5 characters long");
+            et_password.requestFocus();
+            return;
+        }
+
+        if(!confirmpassword.equals(password))
+        {
+            et_confirmpassword.setError("Passwords do not match");
+            et_confirmpassword.requestFocus();
+            return;
+        }
+        else
+        {
+            signup signin =new signup(name,email,password);
+            Call<SignupResponse> call= retroclient
+                    .getInstance()
+                    .getapi()
+                    .createuser(signin);
+
+            call.enqueue(new Callback<SignupResponse>() {
+                @Override
+                public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
+                    try {
+                        if (response.code() == 201) {
+                            SignupResponse res = response.body();
+                            Toast.makeText(MainActivity.this, res.getMsg(), Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            String s = response.errorBody().string();
+                            JSONObject jsonObject = new JSONObject(s);
+                            JSONArray parentarray= jsonObject.getJSONArray("data");
+                             JSONObject obj= parentarray.getJSONObject(0);
+                             String message = obj.getString("msg");
+                            Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+                        }
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                @Override
+                public void onFailure(Call<SignupResponse> call, Throwable t) {
+                    Toast.makeText(MainActivity.this, "error"+t.getMessage(),Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.btnsignup:
+                signup();
+                break;
+
+            case R.id.tvlogin:
+                break;
+        }
+    }
+
+
+}
