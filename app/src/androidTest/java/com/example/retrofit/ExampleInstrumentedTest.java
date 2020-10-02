@@ -21,6 +21,10 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+<<<<<<< HEAD
         assertEquals("com.users.shelp", appContext.getPackageName());
+=======
+        assertEquals("com.example.retrofit", appContext.getPackageName());
+>>>>>>> 8d5c0e5... user login
     }
 }

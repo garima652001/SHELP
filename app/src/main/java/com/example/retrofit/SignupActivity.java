@@ -19,13 +19,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText et_email,et_password,et_name,et_confirmpassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.signup);
 
         et_name=findViewById(R.id.etname);
         et_email=findViewById(R.id.etemail);
@@ -94,8 +94,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     try {
                         if (response.code() == 201) {
                             SignupResponse res = response.body();
-                            Toast.makeText(LoginActivity.this, res.getMessage(), Toast.LENGTH_LONG).show();
-                           Intent intent= new Intent(LoginActivity.this, otp.class);
+                            Toast.makeText(SignupActivity.this, res.getMessage(), Toast.LENGTH_LONG).show();
+                           Intent intent= new Intent(SignupActivity.this, otp.class);
                             intent.putExtra("Token",res.getToken());
                             startActivity(intent);
                         }
@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             JSONArray parentarray= jsonObject.getJSONArray("data");
                              JSONObject obj= parentarray.getJSONObject(0);
                              String message = obj.getString("msg");
-                            Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignupActivity.this, message, Toast.LENGTH_LONG).show();
                         }
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 @Override
                 public void onFailure(Call<SignupResponse> call, Throwable t) {
-                    Toast.makeText(LoginActivity.this, t.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignupActivity.this, t.getMessage(),Toast.LENGTH_LONG).show();
                 }
             });
         }

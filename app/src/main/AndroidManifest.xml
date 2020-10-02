@@ -18,7 +18,7 @@
             android:name="com.google.android.actions"
             android:resource="@xml/actions" />
 
-        <activity android:name=".LoginActivity">
+        <activity android:name=".SignupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
