@@ -1,9 +1,9 @@
-package com.users.shelp;
+package com.example.retrofit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -15,12 +15,11 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText et_email,et_password,et_name,et_confirmpassword;
     @Override
@@ -39,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void signup() {
-       // final String name="abc", email="garima3837@gmail.com", password="123456", confirmpassword="123456";
         String name=et_name.getText().toString();
         String email=et_email.getText().toString();
         String password=et_password.getText().toString();
@@ -96,7 +94,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     try {
                         if (response.code() == 201) {
                             SignupResponse res = response.body();
-                            Toast.makeText(MainActivity.this, res.getMsg(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, res.getMessage(), Toast.LENGTH_LONG).show();
+                           Intent intent= new Intent(LoginActivity.this, otp.class);
+                            intent.putExtra("Token",res.getToken());
+                            startActivity(intent);
                         }
                         else {
                             String s = response.errorBody().string();
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             JSONArray parentarray= jsonObject.getJSONArray("data");
                              JSONObject obj= parentarray.getJSONObject(0);
                              String message = obj.getString("msg");
-                            Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
                         }
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 @Override
                 public void onFailure(Call<SignupResponse> call, Throwable t) {
-                    Toast.makeText(MainActivity.this, "error"+t.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, t.getMessage(),Toast.LENGTH_LONG).show();
                 }
             });
         }

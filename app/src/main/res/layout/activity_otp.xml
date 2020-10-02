@@ -8,15 +8,15 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_width="202dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="84dp"
         android:fontFamily="@font/droid_sans"
         android:text="Confirm your Email"
-        android:textSize="26sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.318"
+        app:layout_constraintHorizontal_bias="0.239"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,8 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="60dp"
-        android:layout_marginTop="64dp"
-
+        android:layout_marginTop="80dp"
         android:text="Enter the OTP we have send on your  email"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
         android:layout_marginLeft="68dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="40dp"
         android:text="OTP"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -58,37 +57,41 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/tvresend_otp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="80dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginLeft="68dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="44dp"
         android:text="Didn't receive OTP? Resend"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etotp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_confirmemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="60dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="36dp"
         android:background="@drawable/bg"
         android:text="Confirm email"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/tvresend_otp" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/tv_login1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="72dp"
         android:text="Already have an account ? Login"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.452"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_confirmemail" />
 </androidx.constraintlayout.widget.ConstraintLayout>

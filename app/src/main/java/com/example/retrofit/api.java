@@ -1,4 +1,4 @@
-package com.users.shelp;
+package com.example.retrofit;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -7,7 +7,11 @@ import retrofit2.http.PUT;
 
 public interface api {
 
-   @PUT("signup")
+    @POST("signup/otp")
+    Call<OtpResponse> verifymail(@Body Verify otp_ver);
+
+    @PUT("signup")
    Call<SignupResponse> createuser(@Body signup create);
+
 
 }

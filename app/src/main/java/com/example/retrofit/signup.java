@@ -1,4 +1,4 @@
-package com.users.shelp;
+package com.example.retrofit;
 
 public class signup {
     String name, email, password;
