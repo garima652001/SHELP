@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.retrofit.apipackage.RetrofitClient;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -76,21 +77,30 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                if(!response.isSuccessful()) {
+                if (!response.isSuccessful()) {
                     try {
                         String string = response.errorBody().string();
+//                        JSONObject jsonObject1 = new JSONObject(string);
+//                        String wrong = jsonObject1.getString("message");
+//                        Toast.makeText(getApplicationContext(), wrong, Toast.LENGTH_LONG).show();
                         JSONObject jsonObject = new JSONObject(string);
-                        String wrong = jsonObject.getString("message");
-                        Toast.makeText(getApplicationContext(), wrong, Toast.LENGTH_LONG).show();
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        JSONObject meals = jsonArray.getJSONObject(0);
+                        String wrong1=meals.getString("msg");
+                        Toast.makeText(getApplicationContext(), wrong1, Toast.LENGTH_LONG).show();
                     } catch (JSONException | IOException e) {
                         e.printStackTrace();
                     }
+                } else {
+//                    Toast.makeText(getApplicationContext(), response.body().getMessage() + " " + response.body().getUsername() + " " + response.body().getToken(), Toast.LENGTH_LONG).show();
+                    String token = response.body().getToken();
+                    Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
+                    SharedPreferences sharedPreferences = getSharedPreferences("t", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("str", token);
+                    editor.apply();
                 }
-           else
-               Toast.makeText(getApplicationContext(),response.body().getMessage()+" "+response.body().getUsername(),Toast.LENGTH_LONG).show();
-               // SharedPreferences token=
             }
-
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
