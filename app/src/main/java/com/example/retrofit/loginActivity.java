@@ -105,10 +105,16 @@ public class loginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), response.body().getMessage() + " " + response.body().getUsername() + " " + response.body().getToken(), Toast.LENGTH_LONG).show();
                     String token = response.body().getToken();
                     Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
-                    SharedPreferences sharedPreferences = getSharedPreferences("t", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("str", token);
-                    editor.apply();
+                   // SharedPreferences sharedPreferences = getSharedPreferences("t", MODE_PRIVATE);
+                    //SharedPreferences.Editor editor = sharedPreferences.edit();
+                    //editor.putString("str", token);
+                    //editor.apply();
+                    Sharedprefs.saveSharedsetting(loginActivity.this,"Clip" ,"false");
+                    Sharedprefs.sharedprefsave(getApplicationContext(), response.body().getUsername(),token);
+                    Intent islogged = new Intent(getApplicationContext(),MainActivity.class);
+                    startActivity(islogged);
+                    finish();
+
                 }
             }
 

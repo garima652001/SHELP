@@ -1,16 +1,20 @@
 package com.example.retrofit;
 
 public class LoginResponse {
-    String userId,message,username,token;
-
-    public String getToken() {
-        return token;
-    }
+    String message,token,username,userId;
 
     public LoginResponse(String userId, String message, String username, String token) {
         this.userId = userId;
         this.message = message;
         this.username = username;
+        this.token = token;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
         this.token = token;
     }
 
