@@ -146,14 +146,14 @@
         android:layout_marginTop="56dp"
         android:fontFamily="@font/droid_sans"
         android:text="New user? "
-        app:layout_constraintBottom_toBottomOf="@+id/signup"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_signup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button"
         app:layout_constraintVertical_bias="0.0"
         android:layout_marginLeft="152dp" />
 
     <TextView
-        android:id="@+id/signup"
+        android:id="@+id/tv_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

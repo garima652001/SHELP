@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -99,6 +100,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             intent.putExtra("Token",res.getToken());
                             intent.putExtra("email",email);
                             startActivity(intent);
+                            Log.d("token", res.getToken());
                         }
                         else {
                             String s = response.errorBody().string();
@@ -130,6 +132,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 break;
 
             case R.id.tvlogin:
+                Intent intent=new Intent(this,loginActivity.class);
+                startActivity(intent);
                 break;
         }
     }

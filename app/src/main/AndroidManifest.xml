@@ -12,6 +12,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name="com.example.retrofit.otp" />
+        <activity android:name=".loginActivity" />
 
         <activity android:name=".SignupActivity">
             <intent-filter>

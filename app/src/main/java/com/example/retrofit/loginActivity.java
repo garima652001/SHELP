@@ -2,6 +2,7 @@ package com.example.retrofit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -42,6 +43,13 @@ public class loginActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 LoginUser();
+            }
+        });
+        findViewById(R.id.tv_signup).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(loginActivity.this,SignupActivity.class);
+                startActivity(intent);
             }
         });
     }

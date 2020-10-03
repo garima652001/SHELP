@@ -35,6 +35,7 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
         et_otp= findViewById(R.id.etotp);
         findViewById(R.id.btn_confirmemail).setOnClickListener(this);
         findViewById(R.id.tvresend_otp).setOnClickListener(this);
+        findViewById(R.id.tv_login1).setOnClickListener(this);
     }
 
     @Override
@@ -54,6 +55,11 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
                                        }
                                    }, 3*60*100);
                 resend();
+                break;
+
+            case R.id.tv_login1:
+                Intent intent=new Intent(this,loginActivity.class);
+                startActivity(intent);
                 break;
         }
     }
